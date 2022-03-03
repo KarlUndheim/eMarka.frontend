@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from "next/link"
 
 export default function Homepage() {
   return (
+    
     <div>
-      <Link to="/destination/:id"><p>Destinations</p></Link>
+      <Link href={"/destination/:id"}><p>Destinations</p></Link>
       <br></br>
-      <Link to="/observation/:id"><p>Observations</p></Link>
+      <Link href={"/observation/:id"}><p>Observations</p></Link>
     </div>
+    
   )
 }
