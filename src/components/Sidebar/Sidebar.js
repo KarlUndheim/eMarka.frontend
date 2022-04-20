@@ -12,11 +12,11 @@ import {
     FiHome,
     FiCalendar,
     FiUser,
-    FiDollarSign,
-    FiBriefcase,
+    FiActivity,
+    FiMapPin,
+    FiNavigation,
     FiSettings
 } from 'react-icons/fi'
-import { IoPawOutline } from 'react-icons/io5'
 import NavItem from './NavItem'
 
 function Sidebar() {
@@ -52,13 +52,12 @@ function Sidebar() {
                             changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} icon={FiHome} title="Dashboard" description="This is the description for the dashboard." />
-                <NavItem navSize={navSize} icon={FiCalendar} title="Calendar" active />
-                <NavItem navSize={navSize} icon={FiUser} title="Clients" />
-                <NavItem navSize={navSize} icon={IoPawOutline} title="Animals" />
-                <NavItem navSize={navSize} icon={FiDollarSign} title="Stocks" />
-                <NavItem navSize={navSize} icon={FiBriefcase} title="Reports" />
-                <NavItem navSize={navSize} icon={FiSettings} title="Settings" />
+                <NavItem navSize={navSize} icon={FiHome} title="Hjem" />
+                <NavItem navSize={navSize} icon={FiUser} title="Din profil" />
+                <NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" />
+                <NavItem navSize={navSize} icon={FiActivity} title="Dine ruter" />
+                <NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." />
+                <NavItem navSize={navSize} icon={FiSettings} title="Instillinger" />
             </Flex>
 
             <Flex
@@ -72,8 +71,8 @@ function Sidebar() {
                 <Flex mt={4} align="center">
                     <Avatar size="sm" src="avatar-1.jpg" />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Heading as="h3" size="sm">Sylwia Weller</Heading>
-                        <Text color="gray">Admin</Text>
+                        <Heading as="h3" size="sm">Martin Bondevik</Heading>
+                        <Text color="gray">Bruker</Text>
                     </Flex>
                 </Flex>
             </Flex>
