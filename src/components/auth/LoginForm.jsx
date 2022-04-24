@@ -101,26 +101,26 @@ import {
     };
   
     return (
-      <Flex minH={"81vh"} align={"center"} justify={"center"}>
+      <Flex minH={"81vh"} align={"center"} justify={"center"} >
         <Stack spacing={3} mx={"auto"} maxW={"lg"} py={12} px={6}>
           <Stack align={"center"}>
-            <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-            <Text fontSize={"lg"} color={"gray.600"}>
-              to enjoy all of our cool features✌️
+            <Heading fontSize={"4xl"}>Logg inn på din bruker</Heading>
+            <Text fontSize={"lg"} color={"gray.600"}> 
+              for å benytte deg av eMarka🏞
             </Text>
           </Stack>
   
-          <Alert status="warning" visibility={isError ? "visible" : "hidden"}>
+          <Alert status="warning" visibility={isError ? "visible" : "hidden"} >
             <AlertIcon />
             {isError && error.message}
           </Alert>
-          <Box rounded={"lg"} boxShadow={"lg"} p={8} mt={"10px"} pt={0}>
+          <Box rounded={"lg"} boxShadow={"lg"} p={8} mt={"10px"} pt={0} >
             <form onSubmit={handleTest}>
-              <Stack spacing={4}>
-                <FormControl id="email">
-                  <FormLabel>Username or email</FormLabel>
+              <Stack spacing={4} >
+                <FormControl id="email" >
+                  <FormLabel>Brukernavn eller epostadresse</FormLabel>
                   <Input
-                    type="email"
+                    type="email" 
                     onChange={(e) => {
                       setUsername(e.target.value);
                       setSubmitted(false);
@@ -130,10 +130,10 @@ import {
                     }}
                   />
                 </FormControl>
-                <FormControl id="password">
-                  <FormLabel>Password</FormLabel>
+                <FormControl id="password" >
+                  <FormLabel>Passord</FormLabel>
                   <Input
-                    type="password"
+                    type="password" 
                     onChange={(e) => {
                       setPassword(e.target.value);
                       setSubmitted(false);
@@ -143,24 +143,24 @@ import {
                     }}
                   />
                 </FormControl>
-                <Stack spacing={10}>
+                <Stack spacing={10} >
                   <Button
                     isLoading={submitted}
-                    bg={"ticker.blue"}
+                    bg={"green.300"}
                     color={"white"}
                     _hover={{
-                      bg: "ticker.blue_hover",
+                      bg: "green.500",
                     }}
                     onClick={handleSubmit}
                   >
-                    Sign in
+                    Logg inn
                   </Button>
                 </Stack>
-                <Stack align={"center"} mt={0}>
+                <Stack align={"center"} mt={0} > 
                   <Text>
-                    New here?{" "}
+                    Har du ikke bruker?{" "}
                     <Link href={"/register"} color={"blue.500"}>
-                      Create a new account
+                      Opprett bruker her
                     </Link>
                   </Text>
                 </Stack>

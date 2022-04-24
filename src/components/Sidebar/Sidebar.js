@@ -5,6 +5,7 @@ import {
     IconButton,
     Divider,
     Avatar,
+    Link,
     Heading
 } from '@chakra-ui/react'
 import {
@@ -29,9 +30,11 @@ function Sidebar() {
             marginTop="2.5vh"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
             borderRadius={navSize == "small" ? "15px" : "30px"}
-            w={navSize == "small" ? "75px" : "200px"}
+            //w={navSize == "small" ? "90px" : "200px"}
+            w="100%"
             flexDir="column"
             justifyContent="space-between"
+            zIndex={20}
         >
             <Flex
                 p="5%"
@@ -52,12 +55,12 @@ function Sidebar() {
                             changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} icon={FiHome} title="Hjem" />
+                <NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" />
                 <NavItem navSize={navSize} icon={FiUser} title="Din profil" />
                 <NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" />
                 <NavItem navSize={navSize} icon={FiActivity} title="Dine ruter" />
                 <NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." />
-                <NavItem navSize={navSize} icon={FiSettings} title="Instillinger" />
+                <NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" />
             </Flex>
 
             <Flex
@@ -71,8 +74,8 @@ function Sidebar() {
                 <Flex mt={4} align="center">
                     <Avatar size="sm" src="avatar-1.jpg" />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Heading as="h3" size="sm">Martin Bondevik</Heading>
-                        <Text color="gray">Bruker</Text>
+                        <Heading as="h3" size="sm">Min side</Heading>
+                        <Link href={"/login"} color={"gray"}> Logg inn her </Link>
                     </Flex>
                 </Flex>
             </Flex>
