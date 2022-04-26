@@ -18,7 +18,8 @@ import {
     FiNavigation,
     FiSettings
 } from 'react-icons/fi'
-import NavItem from './NavItem'
+import { EMARKA_GREEN } from '../../../consts';
+import NavItem from './NavItem';
 
 function Sidebar() {
     const [navSize, changeNavSize] = useState("large")
@@ -56,10 +57,13 @@ function Sidebar() {
                     }}
                 />
                 <NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" />
-                <NavItem navSize={navSize} icon={FiUser} title="Din profil" />
+                <Link href="/" color={EMARKA_GREEN}>Hjem</Link>
+                <NavItem navSize={navSize} icon={FiUser} title="Din profil"/>
                 <NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" />
-                <NavItem navSize={navSize} icon={FiActivity} title="Dine ruter" />
+                <NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/>
+                <Link href="/routes" color={EMARKA_GREEN}>Ruter</Link>
                 <NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." />
+                <Link href="/makeroute" color={EMARKA_GREEN}>Lag rute</Link>
                 <NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" />
             </Flex>
 
@@ -74,7 +78,6 @@ function Sidebar() {
                 <Flex mt={4} align="center">
                     <Avatar size="sm" src="avatar-1.jpg" />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Heading as="h3" size="sm">Min side</Heading>
                         <Link href={"/login"} color={"gray"}> Logg inn her </Link>
                     </Flex>
                 </Flex>

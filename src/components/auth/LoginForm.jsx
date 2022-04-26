@@ -102,7 +102,7 @@ import {
   
     return (
       <Flex minH={"81vh"} align={"center"} justify={"center"} >
-        <Stack spacing={3} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack spacing={3} mx={"auto"} maxW={"lg"} py={12} px={6} bg="white">
           <Stack align={"center"}>
             <Heading fontSize={"4xl"}>Logg inn på din bruker</Heading>
             <Text fontSize={"lg"} color={"gray.600"}> 

@@ -3,12 +3,8 @@ import { Box, Center, useColorModeValue, Heading, Text, Stack, Image, Badge } fr
 import { BACKEND_URL } from "../../consts";
 
 const Route = ({ data }) => {
-  const { name, distance } = data.attributes;
+  const { Title, distance } = data.attributes;
 
-  const image =
-    data.attributes.images.data != null
-      ? `${BACKEND_URL}${data.attributes.images.data[0].attributes.url}`
-      : "http://placehold.jp/300x300.png";
 
   return (
     <Center py={12}>
@@ -45,14 +41,13 @@ const Route = ({ data }) => {
             },
           }}
         >
-          <Image rounded={"lg"} height={230} width={282} objectFit={"cover"} src={image} />
         </Box>
         <Stack pt={10} align={"center"}>
           <Text color={"gray.500"} fontSize={"sm"} textTransform={"uppercase"}>
             Distanse: {distance}km
           </Text>
-          <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
-            {name}
+          <Heading fontSize={"2xl"} fontFamily={"body"} color={"grey.500"} fontWeight={500}>
+            {Title}
           </Heading>
           <Stack direction={"row"} align={"center"}>
             <Text fontWeight={800} fontSize={"xl"}>

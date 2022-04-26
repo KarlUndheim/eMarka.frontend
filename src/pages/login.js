@@ -1,12 +1,18 @@
 import LoginForm from "../components/auth/LoginForm";
-import logo from  "../images/eMarka_logo.png";
+import Sidebar from "../components/Sidebar/Sidebar";
+import { Flex, Center, Box } from "@chakra-ui/react";
+import { EMARKA_GREEN } from "../../consts";
 
 const Login = () => {
   return (
-  <div>
-    <img src={logo} alt="Logo"/>
-    <LoginForm />
-  </div>
+    <Flex color='grey.500'>
+    <Center w='190px' bg='white'>
+      <Sidebar/>
+    </Center>
+    <Box flex='1' bg={EMARKA_GREEN}>
+      <LoginForm/>
+    </Box>
+  </Flex>
   )
 };
 
