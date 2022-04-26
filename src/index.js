@@ -1,34 +1,12 @@
-import { Flex, Text, IconButton } from '@chakra-ui/react'
-import { FiMenu } from 'react-icons/fi'
-import Sidebar from '../components/Sidebar/Sidebar'
-import Map from '../components/Map'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './index.css';
+import App from './App';
 
-
-const Home = () => {
-  return (
-    <Flex width="100%">
-      <Sidebar />
-      <Flex
-        pos="absolute"
-        top="50%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-      >
-        <Text>Click the
-          <IconButton
-            background="none"
-            _hover={{ background: 'none' }}
-            icon={<FiMenu />}
-          />
-        to resize the vertical fab bar.</Text>
-      </Flex>
-    </Flex>
-  )
-}
-
-const Map = dynamic(() => import("../components/Map"), {
-  loading: () => "Loading...",
-  ssr: false
-});
-
-export default Home
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

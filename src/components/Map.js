@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import ReactMapGL from 'react-map-gl';
-import mapboxgl from '!mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 
 const MapGL = ReactMapboxGl({
