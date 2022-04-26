@@ -6,13 +6,13 @@ import { EMARKA_GREEN } from "../../consts";
 const Login = () => {
   return (
     <Flex color='grey.500'>
-    <Center w='190px' bg='white'>
-      <Sidebar/>
-    </Center>
-    <Box flex='1' bg={EMARKA_GREEN}>
-      <LoginForm/>
-    </Box>
-  </Flex>
+      <Center w='190px' bg='white'>
+        <Sidebar/>
+      </Center>
+      <Box flex='1' bg={EMARKA_GREEN}>
+        <LoginForm/>
+      </Box>
+    </Flex>
   )
 };
 
