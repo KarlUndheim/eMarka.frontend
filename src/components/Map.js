@@ -8,7 +8,7 @@ const MapGL = ReactMapboxGl({
     "pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ"
 });
 
-const Map= () => {
+ const Map= () => {
   const [viewport, setViewport] = useState({
     latitude: 63.3998,
     longitude: 10.4766,
@@ -17,8 +17,7 @@ const Map= () => {
     pitch: 0,
   });
   
-
-  return (
+ return (
     <div className="mapbox-react">
      <MapGL
         style="mapbox://styles/mapbox/outdoors-v11"
@@ -34,6 +33,4 @@ const Map= () => {
       </MapGL>
     </div>
   );
-};
-
 export default Map;
