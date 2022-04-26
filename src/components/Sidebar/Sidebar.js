@@ -56,15 +56,13 @@ function Sidebar() {
                             changeNavSize("small")
                     }}
                 />
-                <NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" />
-                <Link href="/" color={EMARKA_GREEN}>Hjem</Link>
-                <NavItem navSize={navSize} icon={FiUser} title="Din profil"/>
-                <NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" />
-                <NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/>
-                <Link href="/routes" color={EMARKA_GREEN}>Ruter</Link>
-                <NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." />
-                <Link href="/makeroute" color={EMARKA_GREEN}>Lag rute</Link>
-                <NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" />
+                <Link href="/"><NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" /></Link>
+                <Link href="/userprofile"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
+                <Link href="/observation"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
+                <Link href="/routes"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
+                <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
+                <Link href="/settings"><NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" /></Link>
+                
             </Flex>
 
             <Flex
