@@ -25,6 +25,7 @@ import {
 import SaveIcon from '@material-ui/icons/Save';
 import { Flex, Center } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Footer from '../components/Footer/Footer';
 import { EMARKA_GREEN } from '../../consts';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -475,3 +476,4 @@ export default function MapView() {
   </Flex>
     );
 }
+
