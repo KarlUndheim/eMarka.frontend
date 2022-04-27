@@ -26,6 +26,9 @@ function Sidebar() {
     return (
         <Flex
             pos="sticky"
+            border="2px"
+            borderColor={'gray.200'}
+            marginLeft='4'
             left="5"
             h="95vh"
             marginTop="2.5vh"
