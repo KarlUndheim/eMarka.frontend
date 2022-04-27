@@ -33,7 +33,7 @@ import axios from 'axios';
 import GEOM_URL from  "../../consts";
 
 mapboxgl.accessToken =
-    'pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ';
+    'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
 
 export default function MapView() {
     const mapContainer = useRef(null);

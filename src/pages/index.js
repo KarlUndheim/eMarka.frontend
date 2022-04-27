@@ -49,7 +49,7 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import { EMARKA_GREEN } from '../../consts';
 
 mapboxgl.accessToken =
-    'pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ';
+    'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
 
 export default function Home() {
     const mapContainer = useRef(null);
