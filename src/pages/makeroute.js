@@ -470,6 +470,17 @@ export default function MapView() {
                     </Grid>
                                             */}
                 </Box>
+                <div
+                    style={{
+                        position: "fixed",
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        backgroundColor: "primary.main"
+                    }}
+                    >
+                    <Footer/>
+                </div>
             </div>
         </Box>
         </Box>

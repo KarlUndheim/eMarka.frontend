@@ -42,7 +42,7 @@ export const Footer = () => (
         </ButtonGroup>
       </Stack>
       <Text fontSize="sm" color="subtle">
-        &copy; Kart levert av Wing Orienteringsklubb.
+        &copy;Wing Orienteringsklubb
       </Text>
     </Stack>
   </Container>
