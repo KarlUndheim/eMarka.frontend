@@ -14,7 +14,6 @@ export default function NavItem({ icon, title, description, active, navSize }) {
     return (
         <Flex
             mt={30}
-            h={[6, 6, 10, 10]}
             flexDir="column"
             w="100%"
             alignItems={navSize == "small" ? "center" : "flex-start"}
