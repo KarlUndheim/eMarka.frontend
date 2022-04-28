@@ -4,6 +4,7 @@ import { BACKEND_URL } from "../../consts";
 
 const Route = ({ data }) => {
   const { Title, distance } = data.attributes;
+  // const image = require("../images/skogstur");
 
 
   return (
@@ -41,6 +42,8 @@ const Route = ({ data }) => {
             },
           }}
         >
+        <Image rounded={"lg"} height={230} width={282} objectFit={"cover"} src={`/images/skogstur.jpeg`} />
+       
         </Box>
         <Stack pt={10} align={"center"}>
           <Text color={"gray.500"} fontSize={"sm"} textTransform={"uppercase"}>

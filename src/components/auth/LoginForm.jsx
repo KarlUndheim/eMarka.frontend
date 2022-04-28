@@ -17,6 +17,8 @@ import {
   import axios from "axios";
   import { useToast } from "@chakra-ui/react";
   import { useState, useEffect } from "react";
+import { EMARKA_GREEN } from "../../../consts";
+import {setCookie} from "nookies"
   
   const LoginForm = () => {
     const router = useRouter();
@@ -69,11 +71,17 @@ import {
         password: password,
       };
   
-      const req = await axios.post("/api/login", body);
+      const req = await axios.post("http://localhost:1337/api/auth/local", body);
   
       const success = req.data.jwt != null;
   
+      
+
       if (success) {
+        setCookie(null, 'jwt', req.data.jwt, {
+          maxAge: 30 * 24 * 60 * 60,
+          path: '/',
+        })
         setError({});
         toast({
           title: "Successfully logged in!",
@@ -149,7 +157,7 @@ import {
                     bg={"green.300"}
                     color={"white"}
                     _hover={{
-                      bg: "green.500",
+                      bg: {EMARKA_GREEN},
                     }}
                     onClick={handleSubmit}
                   >
@@ -159,7 +167,7 @@ import {
                 <Stack align={"center"} mt={0} > 
                   <Text>
                     Har du ikke bruker?{" "}
-                    <Link href={"/register"} color={"blue.500"}>
+                    <Link href={"/register"} color={EMARKA_GREEN}>
                       Opprett bruker her
                     </Link>
                   </Text>
