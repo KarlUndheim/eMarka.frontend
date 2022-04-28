@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as turf from '@turf/turf';
 import {
-    Button,
+    // Button,
     IconButton,
     Grid,
     Box,
@@ -23,7 +23,16 @@ import {
     Select,
 } from '@mui/material';
 import SaveIcon from '@material-ui/icons/Save';
-import { Flex, Center } from '@chakra-ui/react';
+import { 
+    Flex,
+    Center,
+    Stack,
+    InputGroup,
+    InputLeftElement,
+    Input,
+    InputRightElement,
+    Button
+} from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar/Sidebar';
 import { EMARKA_GREEN } from '../../consts';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -31,6 +40,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 // ved feilmelding: npm install @mui/icons-material
 import axios from 'axios';
 import GEOM_URL from  "../../consts";
+import { useHistory } from "react-router";
 
 mapboxgl.accessToken =
     'pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ';
@@ -48,7 +58,7 @@ export default function MapView() {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [routeName, setRouteName] = useState('');
-    const [routeType, setRouteType] = useState('walking');
+    const [routeDescription, setRouteDescription] = useState('');
     const [ownRouteNames, setOwnRouteNames] = useState([]);
     const [intersectRoute, setIntersectRoute] = useState([]);
 
@@ -110,7 +120,7 @@ export default function MapView() {
         map && fillMap(mapContainer);
     }, [map]);
 
-    /*useEffect(async () => {
+    useEffect(async () => {
         await axios
             .get({GEOM_URL})
             .then(function (response) {
@@ -129,7 +139,7 @@ export default function MapView() {
             console.log(nothing.features[i].properties.name);
             ownRouteNames.push(nothing.features[i].properties.name);
         }
-    }, []);*/
+    }, []);
 
     // const displayOwnRoutes = () => {
     //     map.addSource('route_own', {
@@ -200,14 +210,15 @@ export default function MapView() {
     const savePath = () => {
         length = turf.length(finalPath, 'kilometers');
         const coordinates = finalPath.features[0].geometry;
+        
         axios.post({GEOM_URL}, {
             userid: sessionStorage.getItem('id'),
-            geom: coordinates,
-            length: length,
-            type: routeType,
-            name: routeName,
+            route: coordinates,
+            distance: length,
+            description: routeDescription,
+            Title: routeName,
         });
-        handleCloseDialog();
+        // handleCloseDialog();
     };
 
     const clearPath = () => {
@@ -240,7 +251,7 @@ export default function MapView() {
     };
 
      const displayOwnRoutes = () => {
-         map.getSource('route').setData(nothing);
+         map.getSource('https://localhost:1337/api/auth/routes').setData(nothing);
      };
 
      //HER MÅ VI ENDRE PÅ SOURCE tror jeg
@@ -250,21 +261,35 @@ export default function MapView() {
         setOpenPopover(!openPopover);
     };
 
-    const handleClickOpenDialog = () => {
-        setOpenDialog(true);
-    };
+    // const handleClickOpenDialog = () => {
+    //     setOpenDialog(true);
+    // };
 
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
+    // const handleCloseDialog = () => {
+    //     setOpenDialog(false);
+    // };
 
     const handleSetRouteName = (event) => {
         setRouteName(event.target.value);
     };
 
-    const handleSetRouteType = (event) => {
-        setRouteType(event.target.value);
+    const handleSetRouteDescription = (event) => {
+        setRouteDescription(event.target.value);
     };
+
+    const handleOnClick = (event) => {
+        length = turf.length(finalPath, 'kilometers');
+        const coordinates = finalPath.features[0].geometry;
+        
+        axios.post({GEOM_URL}, {
+            userid: sessionStorage.getItem('id'),
+            route: coordinates,
+            distance: length,
+            type: routeType,
+            Title: routeName,
+        });
+
+    }
 
     return (
         <Flex color='grey.500'>
@@ -272,6 +297,7 @@ export default function MapView() {
       <Sidebar/>
     </Center>
     <Box flex='1' bg={EMARKA_GREEN}>
+    <div>
         <Box width={1} style={{ paddingTop: '30px' }}>
             <div
                 id="comparison-container"
@@ -296,7 +322,7 @@ export default function MapView() {
                         borderColor: 'primary.main',
                     }}
                 >
-                    {/*<Grid
+                    <Grid
                         style={{
                             position: 'absolute',
                             width: '100%',
@@ -410,11 +436,8 @@ export default function MapView() {
                                 width: '50%',
                             }}
                         >
-                        */}
-                            
                                 <SaveIcon />
                             
-                            {/*
                             <IconButton
                                 aria-label="save"
                                 style={{
@@ -426,7 +449,7 @@ export default function MapView() {
                             >
                                 <DeleteForeverIcon />
                             </IconButton>
-                            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                            {/* <Dialog open={openDialog} onClose={handleCloseDialog}>
                                 <DialogTitle>Create route</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText>
@@ -464,14 +487,44 @@ export default function MapView() {
                                     <Button onClick={handleCloseDialog}>Cancel</Button>
                                     <Button onClick={savePath}>Create</Button>
                                 </DialogActions>
-                            </Dialog>
+                            </Dialog> */}
                         </Grid>
                     </Grid>
-                                            */}
+                                            
                 </Box>
             </div>
         </Box>
+        <Stack spacing={4}>
+            <InputGroup margin = '60px'>
+                  <InputGroup width='20%'>
+                     <InputLeftElement 
+                     pointerEvents='none'
+                     // children={<PhoneIcon color='gray.300' />}
+                     />
+                    <Input type='Title' id="Title" placeholder='Navn på rute' onChange={handleSetRouteName}/>
+                  </InputGroup>
+     
+                   <InputGroup width='61%'>
+                        <InputLeftElement
+                          pointerEvents='none'
+                         color='gray.300'
+                           fontSize='1.2em'
+                         //  children='$'
+                            />
+                   <Input type = 'description' id="description" placeholder='Beskrivelse' />
+                           {/* <InputRightElement children={<CheckIcon color='green.500' />} /> */}
+                  </InputGroup>
+                  <Button onClick={savePath} colorScheme='blue'>Lagre rute</Button>
+            </InputGroup>
+             </Stack>
+             </div>
         </Box>
-  </Flex>
+
+          </Flex>
     );
+}
+
+function handleInput() {
+    let input = document.getElementById("userInput").value;
+    alert(input)
 }
