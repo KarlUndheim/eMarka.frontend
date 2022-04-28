@@ -85,7 +85,7 @@ export default function Home() {
                 id="comparison-container"
                 style={{
                     position: 'relative',
-                    height: '80vh',
+                    height: '90vh',
                     display: 'flex',
                     justifyContent: 'center',
                 }}
@@ -97,8 +97,8 @@ export default function Home() {
                         position: 'absolute',
                         top: '0',
                         bottom: '0',
-                        width: '90%',
-                        height: '80vh',
+                        width: '95%',
+                        height: '93vh',
                         border: 3,
                         borderRadius: 8,
                         borderColor: 'primary.main',

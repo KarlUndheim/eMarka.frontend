@@ -2,6 +2,7 @@ import LoginForm from "../components/auth/LoginForm";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { Flex, Center, Box } from "@chakra-ui/react";
 import { EMARKA_GREEN } from "../../consts";
+import { redirectIfLogged } from "../../utils/auth";
 
 const Login = () => {
   return (
@@ -16,4 +17,9 @@ const Login = () => {
   )
 };
 
+export const getServerSideProps = async (ctx) => {
+  return redirectIfLogged(ctx);
+};
+
 export default Login;
+

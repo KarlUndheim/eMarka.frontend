@@ -14,9 +14,11 @@ import {
     useColorModeValue,
   } from "@chakra-ui/react";
   import { useRouter } from "next/router";
+  import { validateEmail } from "../../../utils/validation";
   import axios from "axios";
   import { useToast } from "@chakra-ui/react";
   import { useState, useEffect } from "react";
+  import { EMARKA_GREEN } from "../../../consts";
   
   const RegisterForm = () => {
     const router = useRouter();
@@ -81,20 +83,35 @@ import {
   
     const newUser = async (e) => {
       const body = {
-        username: username,
-        email: email,
-        password: password,
+        
+          username: username,
+          email: email,
+          password: password,
+        
       };
   
-      const req = await axios.post("/api/register", body);
+      const req = await axios.post('http://localhost:1337/api/users', body);
+
+      console.log(JSON.stringify(body))
   
-      const success = req.data.jwt != null;
+      console.log(req)
+
+      if (req.status == 400) {
+        setError({ message: "Brukernavnet/eposten er allerede i bruk"});
+        setIsError(true)
+        setSubmitted(false);
+        return;
+      }
+
+      const success = req.status == 201;
   
       if (success) {
         setError({});
         setIsError(false);
         router.push("/");
-        toast({
+        
+        
+        ({
           title: "Welcome! Account created successfully!",
           status: "success",
           isClosable: true,
@@ -192,7 +209,7 @@ import {
                   colorScheme="teal"
                   bg={"green.300"}
                   _hover={{
-                    bg: "green.500",
+                    bg: {EMARKA_GREEN},
                   }}
                   isLoading={submitted}
                   onClick={handleSubmit}
@@ -205,7 +222,7 @@ import {
             <Stack align={"center"} mt={4}>
               <Text>
                 Har du allerede en bruker?{" "}
-                <Link href={"/login"} color={"blue.500"}>
+                <Link href={"/login"} color={EMARKA_GREEN}>
                   Logg inn her
                 </Link>
               </Text>
