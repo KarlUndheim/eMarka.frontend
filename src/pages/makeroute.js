@@ -25,6 +25,7 @@ import {
 import SaveIcon from '@material-ui/icons/Save';
 import { Flex, Center } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Footer from '../components/Footer/Footer';
 import { EMARKA_GREEN } from '../../consts';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -33,7 +34,7 @@ import axios from 'axios';
 import GEOM_URL from  "../../consts";
 
 mapboxgl.accessToken =
-    'pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ';
+    'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
 
 export default function MapView() {
     const mapContainer = useRef(null);
@@ -469,9 +470,21 @@ export default function MapView() {
                     </Grid>
                                             */}
                 </Box>
+                <div
+                    style={{
+                        position: "fixed",
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        backgroundColor: "primary.main"
+                    }}
+                    >
+                    <Footer/>
+                </div>
             </div>
         </Box>
         </Box>
   </Flex>
     );
 }
+

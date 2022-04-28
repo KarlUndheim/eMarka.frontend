@@ -46,10 +46,11 @@ import {
 import SaveIcon from '@material-ui/icons/Save';
 import { Flex, Center, Text } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Footer from '../components/Footer/Footer';
 import { EMARKA_GREEN } from '../../consts';
 
 mapboxgl.accessToken =
-    'pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ';
+    'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
 
 export default function Home() {
     const mapContainer = useRef(null);
@@ -79,6 +80,7 @@ export default function Home() {
     <Center w='190px' bg='white'>
       <Sidebar/>
     </Center>
+
     <Box flex='1' bg={EMARKA_GREEN}>
         <Box width={1} style={{ paddingTop: '30px' }}>
             <div
@@ -106,8 +108,19 @@ export default function Home() {
                 >                        
                                 <SaveIcon />  
                 </Box>
-            </div>
-        </Box>
+                <div
+                    style={{
+                        position: "fixed",
+                        left: 0,
+                        bottom: 0,
+                        right: 15,
+                        backgroundColor: "primary.main"
+                    }}
+                    >
+                    <Footer/>
+                </div>               
+            </div>        
+        </Box>      
         </Box>
   </Flex>
     );
