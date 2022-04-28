@@ -113,7 +113,7 @@ export default function Home() {
                         position: "fixed",
                         left: 0,
                         bottom: 0,
-                        right: 0,
+                        right: 15,
                         backgroundColor: "primary.main"
                     }}
                     >

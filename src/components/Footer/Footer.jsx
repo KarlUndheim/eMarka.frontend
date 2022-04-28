@@ -23,27 +23,11 @@ export const Footer = () => (
         md: '5',
       }}
     >
-      <Stack justify="space-between" direction="row" align="center">
-        <Logo />
-        <ButtonGroup variant="ghost">
-          <IconButton
-            as="a"
-            href="#"
-            aria-label="LinkedIn"
-            icon={<FaLinkedin fontSize="1.25rem" />}
-          />
-          <IconButton as="a" href="#" aria-label="GitHub" icon={<FaGithub fontSize="1.25rem" />} />
-          <IconButton
-            as="a"
-            href="#"
-            aria-label="Twitter"
-            icon={<FaTwitter fontSize="1.25rem" />}
-          />
-        </ButtonGroup>
-      </Stack>
+      <center>
       <Text fontSize="sm" color="subtle">
-        &copy;Wing Orienteringsklubb
+         &copy;Wing Orienteringsklubb 
       </Text>
+      </center>
     </Stack>
   </Container>
 )
