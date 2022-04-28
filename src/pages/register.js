@@ -2,6 +2,7 @@ import RegisterForm from "../components/auth/RegisterForm";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { Flex, Center, Box } from "@chakra-ui/react";
 import { EMARKA_GREEN } from "../../consts";
+import { redirectIfLogged } from "../../utils/auth";
 
 const Register = () => {
   return (
@@ -14,6 +15,10 @@ const Register = () => {
     </Box>
   </Flex>
   );
+};
+
+export const getServerSideProps = (ctx) => {
+  return redirectIfLogged(ctx);
 };
 
 export default Register;

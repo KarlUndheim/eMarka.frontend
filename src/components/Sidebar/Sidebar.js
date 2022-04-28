@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Text,
@@ -20,9 +20,36 @@ import {
 } from 'react-icons/fi'
 import { EMARKA_GREEN } from '../../../consts';
 import NavItem from './NavItem';
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
+import jwtDecode from "jwt-decode";
+
+
 
 function Sidebar() {
     const [navSize, changeNavSize] = useState("large")
+    const [isLogged, setIsLogged] = useState();
+    const router = useRouter();
+
+
+
+    useEffect(async () => {
+        const cookies = parseCookies();
+        const validUser = cookies.jwt || null;
+    
+        if (validUser != null) {
+          setIsLogged(true);
+    
+        //   const { id } = jwtDecode(validUser);
+        //   console.log(id);
+    
+        //   const user = await get(`/api/users/${id}`, null);
+        //   setUser(user);
+    
+          return;
+        }
+        setIsLogged(false);
+      }, [router]);
     return (
         <Flex
             pos="sticky"
@@ -60,8 +87,10 @@ function Sidebar() {
                     }}
                 />
                 <Link href="/"><NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" /></Link>
-                <Link href="/userprofile"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
-                <Link href="/observation"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
+                {isLogged ? 
+                        <Link href="/profileView"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
+                        : <Link href="/register"><NavItem navSize={navSize} icon={FiUser} title="Registrer deg"/></Link>}
+                <Link href="/"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
                 <Link href="/routes"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
                 <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
                 <Link href="/settings"><NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" /></Link>
@@ -79,7 +108,7 @@ function Sidebar() {
                 <Flex mt={4} align="center">
                     <Avatar size="sm" src="avatar-1.jpg" />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        <Link href={"/login"} color={"gray"}> Logg inn her </Link>
+                        {isLogged ? <Link href={"/logout"} color={"gray"}> Logg ut </Link> : <Link href={"/login"} color={"gray"}> Logg inn </Link> }
                     </Flex>
                 </Flex>
             </Flex>

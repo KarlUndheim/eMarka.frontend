@@ -34,6 +34,7 @@ import {
     Button
 } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Footer from '../components/Footer/Footer';
 import { EMARKA_GREEN } from '../../consts';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -41,9 +42,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import axios from 'axios';
 import GEOM_URL from  "../../consts";
 import { useHistory } from "react-router";
+import { useRouter } from "next/router";
 
 mapboxgl.accessToken =
-    'pk.eyJ1IjoibWFydGluYm9uZGV2aWsiLCJhIjoiY2wxd2d6aGFjMDJkZDNqbXM5aDIwZGQ4YiJ9.RCaHBfTRYPm8gAmTdk1XBQ';
+    'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
 
 export default function MapView() {
     const mapContainer = useRef(null);
@@ -61,6 +63,8 @@ export default function MapView() {
     const [routeDescription, setRouteDescription] = useState('');
     const [ownRouteNames, setOwnRouteNames] = useState([]);
     const [intersectRoute, setIntersectRoute] = useState([]);
+    const router = useRouter();
+
 
     useEffect(() => {
         const attachMap = () => {
@@ -90,7 +94,7 @@ export default function MapView() {
                     },
                     paint: {
                         'circle-radius': 10,
-                        'circle-color': '#3887be',
+                        'circle-color': '#1967d2',
                     },
                 });
                 map.addSource('route', {
@@ -107,7 +111,7 @@ export default function MapView() {
                         'line-cap': 'round',
                     },
                     paint: {
-                        'line-color': '#3887be',
+                        'line-color': '#1967d2',
                         'line-width': ['interpolate', ['linear'], ['zoom'], 12, 3, 22, 12],
                     },
                 });
@@ -120,26 +124,26 @@ export default function MapView() {
         map && fillMap(mapContainer);
     }, [map]);
 
-    useEffect(async () => {
-        await axios
-            .get({GEOM_URL})
-            .then(function (response) {
-                let owned_path = response.data.features.filter(
-                    (path) => path.properties.userid === sessionStorage.getItem('id'),
-                );
-                for (let i = 0; i <= owned_path.length - 1; i++) {
-                    nothing.features.push(owned_path[i]);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        console.log(nothing);
-        for (let i = 0; i <= nothing.features.length; i++) {
-            console.log(nothing.features[i].properties.name);
-            ownRouteNames.push(nothing.features[i].properties.name);
-        }
-    }, []);
+    // useEffect(async () => {
+    //     await axios
+    //         .get({GEOM_URL})
+    //         .then(function (response) {
+    //             let owned_path = response.data.features.filter(
+    //                 (path) => path.properties.userid === sessionStorage.getItem('id'),
+    //             );
+    //             for (let i = 0; i <= owned_path.length - 1; i++) {
+    //                 nothing.features.push(owned_path[i]);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    //     console.log(nothing);
+    //      for (let i = 0; i <= nothing.features.length; i++) {
+    //          console.log(nothing.features[i].properties.Title);
+    //          ownRouteNames.push(nothing.features[i].properties.Title);
+    //      }
+    // }, []);
 
     // const displayOwnRoutes = () => {
     //     map.addSource('route_own', {
@@ -207,66 +211,68 @@ export default function MapView() {
         )}?&overview=full&steps=true&geometries=geojson&source=first&access_token=${mapboxgl.accessToken}`;
     };
 
-    const savePath = () => {
+    const savePath = async () => {
         length = turf.length(finalPath, 'kilometers');
+       
         const coordinates = finalPath.features[0].geometry;
-        
-        axios.post({GEOM_URL}, {
-            userid: sessionStorage.getItem('id'),
-            route: coordinates,
-            distance: length,
-            description: routeDescription,
+        console.log(routeName);
+        console.log(routeDescription);
+        console.log(length);
+        console.log(coordinates);
+
+        const body  = {
             Title: routeName,
-        });
-        // handleCloseDialog();
+            distance: length.toFixed(2),
+            route: coordinates,
+            description: routeDescription}
+
+            console.log(JSON.stringify({data:body}))
+
+        const req = await axios.post("http://localhost:1337/api/routes", {data:body});
+  
+          console.log(req)
+        
+        router.push("/routes");
     };
 
-    const clearPath = () => {
-        map.getSource('route').setData(turf.featureCollection([]));
-        map.getSource('point-symbol').setData(turf.featureCollection([]));
-        while (path.features.length) {
-            path.features.pop();
-        }
-        while (nothing.features.length) {
-            nothing.features.pop();
-        }
-    };
+    // const clearPath = () => {
+    //     map.getSource('route').setData(turf.featureCollection([]));
+    //     map.getSource('point-symbol').setData(turf.featureCollection([]));
+    //     while (path.features.length) {
+    //         path.features.pop();
+    //     }
+    //     while (nothing.features.length) {
+    //         nothing.features.pop();
+    //     }
+    // };
 
-    const fetchRoute = async () => {
-        clearPath();
+    // const fetchRoute = async () => {
+    //     clearPath();
 
-        await axios
-            .get({GEOM_URL})
-            .then(function (response) {
-                let owned_path = response.data.features.filter(
-                    (path) => path.properties.userid === sessionStorage.getItem('id'),
-                );
-                for (let i = 0; i <= owned_path.length - 1; i++) {
-                    nothing.features.push(owned_path[i]);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+    //     await axios
+    //         .get({GEOM_URL})
+    //         .then(function (response) {
+    //             let owned_path = response.data.features.filter(
+    //                 (path) => path.properties.userid === sessionStorage.getItem('id'),
+    //             );
+    //             for (let i = 0; i <= owned_path.length - 1; i++) {
+    //                 nothing.features.push(owned_path[i]);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // };
 
-     const displayOwnRoutes = () => {
-         map.getSource('https://localhost:1337/api/auth/routes').setData(nothing);
-     };
+    //  const displayOwnRoutes = () => {
+    //      map.getSource('route').setData(nothing);
+    //  };
 
      //HER MÅ VI ENDRE PÅ SOURCE tror jeg
 
-    const handleClickPopover = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpenPopover(!openPopover);
-    };
-
-    // const handleClickOpenDialog = () => {
-    //     setOpenDialog(true);
-    // };
-
-    // const handleCloseDialog = () => {
-    //     setOpenDialog(false);
+    // const handleClickPopover = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    //     setOpenPopover(!openPopover);
     // };
 
     const handleSetRouteName = (event) => {
@@ -276,20 +282,6 @@ export default function MapView() {
     const handleSetRouteDescription = (event) => {
         setRouteDescription(event.target.value);
     };
-
-    const handleOnClick = (event) => {
-        length = turf.length(finalPath, 'kilometers');
-        const coordinates = finalPath.features[0].geometry;
-        
-        axios.post({GEOM_URL}, {
-            userid: sessionStorage.getItem('id'),
-            route: coordinates,
-            distance: length,
-            type: routeType,
-            Title: routeName,
-        });
-
-    }
 
     return (
         <Flex color='grey.500'>
@@ -322,7 +314,7 @@ export default function MapView() {
                         borderColor: 'primary.main',
                     }}
                 >
-                    <Grid
+                    {/* <Grid
                         style={{
                             position: 'absolute',
                             width: '100%',
@@ -435,9 +427,9 @@ export default function MapView() {
                                 flexDirection: 'column',
                                 width: '50%',
                             }}
-                        >
+                        >*/}
                                 <SaveIcon />
-                            
+                            {/*
                             <IconButton
                                 aria-label="save"
                                 style={{
@@ -448,7 +440,7 @@ export default function MapView() {
                                 onClick={() => clearPath()}
                             >
                                 <DeleteForeverIcon />
-                            </IconButton>
+                            </IconButton> */}
                             {/* <Dialog open={openDialog} onClose={handleCloseDialog}>
                                 <DialogTitle>Create route</DialogTitle>
                                 <DialogContent>
@@ -469,8 +461,8 @@ export default function MapView() {
                                             <InputLabel htmlFor="type">Type</InputLabel>
                                             <Select
                                                 autoFocus
-                                                value={routeType}
-                                                onChange={handleSetRouteType}
+                                                value={routeDescription}
+                                                onChange={handleSetRouteDescription}
                                                 label="type"
                                                 inputProps={{
                                                     name: 'type',
@@ -487,11 +479,22 @@ export default function MapView() {
                                     <Button onClick={handleCloseDialog}>Cancel</Button>
                                     <Button onClick={savePath}>Create</Button>
                                 </DialogActions>
-                            </Dialog> */}
+                            </Dialog> 
                         </Grid>
-                    </Grid>
+                    </Grid>*/}
                                             
                 </Box>
+                <div
+                    style={{
+                        position: "fixed",
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        backgroundColor: "primary.main"
+                    }}
+                    >
+                    <Footer/>
+                </div>
             </div>
         </Box>
         <Stack spacing={4}>
@@ -499,9 +502,8 @@ export default function MapView() {
                   <InputGroup width='20%'>
                      <InputLeftElement 
                      pointerEvents='none'
-                     // children={<PhoneIcon color='gray.300' />}
                      />
-                    <Input type='Title' id="Title" placeholder='Navn på rute' onChange={handleSetRouteName}/>
+                    <Input type='Text' id="Title" placeholder='Navn på rute' onChange={handleSetRouteName}/>
                   </InputGroup>
      
                    <InputGroup width='61%'>
@@ -511,10 +513,9 @@ export default function MapView() {
                            fontSize='1.2em'
                          //  children='$'
                             />
-                   <Input type = 'description' id="description" placeholder='Beskrivelse' />
-                           {/* <InputRightElement children={<CheckIcon color='green.500' />} /> */}
+                   <Input type = 'Rich text' id="description" placeholder='Beskrivelse' onChange={handleSetRouteDescription}/>
                   </InputGroup>
-                  <Button onClick={savePath} colorScheme='blue'>Lagre rute</Button>
+                  <Button onClick={savePath} colorScheme='green'>Lagre rute</Button>
             </InputGroup>
              </Stack>
              </div>
@@ -522,9 +523,4 @@ export default function MapView() {
 
           </Flex>
     );
-}
-
-function handleInput() {
-    let input = document.getElementById("userInput").value;
-    alert(input)
 }
