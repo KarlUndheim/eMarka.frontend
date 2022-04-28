@@ -25,7 +25,7 @@ export const Footer = () => (
     >
       <center>
       <Text fontSize="sm" color="subtle">
-         &copy;Wing Orienteringsklubb 
+          &copy;Wing OK
       </Text>
       </center>
     </Stack>
