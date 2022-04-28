@@ -55,6 +55,7 @@ function Sidebar() {
             pos="sticky"
             border="2px"
             borderColor={'gray.200'}
+            bg={'white'}
             marginLeft='4'
             left="5"
             h="95vh"
