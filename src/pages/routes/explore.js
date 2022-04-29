@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import RoutePreviewCard from "../components/RoutePreviewCard";
-import Sidebar from "../components/Sidebar/Sidebar";
-import { EMARKA_GREEN } from "../../consts";
+import RoutePreviewCard from "../../components/RoutePreviewCard";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import { EMARKA_GREEN } from "../../../consts";
 import { Flex, Box, Heading, Container, Divider, Center } from "@chakra-ui/react";
-import { get } from "../../utils/auth";
-import { matchRoutes } from "react-router-dom";
-//import FilterDropdown from "../../components/FilterDropdown";
+//import { get } from "../../../utils/auth";
+//import { matchRoutes } from "react-router-dom";
 
 const Explore = ({ posts }) => {
   const [routes, setRoute] = useState(null);

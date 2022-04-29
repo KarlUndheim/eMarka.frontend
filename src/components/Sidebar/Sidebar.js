@@ -23,12 +23,14 @@ import NavItem from './NavItem';
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import jwtDecode from "jwt-decode";
+import {get} from "../../../utils/auth"
 
 
 
 function Sidebar() {
     const [navSize, changeNavSize] = useState("large")
     const [isLogged, setIsLogged] = useState();
+    const [user, setUser] = useState();
     const router = useRouter();
 
 
@@ -37,14 +39,15 @@ function Sidebar() {
         const cookies = parseCookies();
         const validUser = cookies.jwt || null;
     
+
         if (validUser != null) {
           setIsLogged(true);
     
-        //   const { id } = jwtDecode(validUser);
-        //   console.log(id);
+            const { id } = jwtDecode(validUser);
+            console.log(id);
     
-        //   const user = await get(`/api/users/${id}`, null);
-        //   setUser(user);
+             const user = await get(`/api/users/${id}`, null);
+            setUser(user);
     
           return;
         }
@@ -75,16 +78,28 @@ function Sidebar() {
                 alignItems={navSize == "small" ? "center" : "flex-start"}
                 as="nav"
             >
+<<<<<<< HEAD
+                <Heading fontSize={"4xl"} fontFamily={"body"} color={EMARKA_GREEN} fontWeight={500}> eMarka</Heading>
+=======
                 <Flex>
                 <Link href="/"><Heading fontSize={"4xl"} fontFamily={"body"} space-between={"10px"} color= {EMARKA_GREEN} fontWeight={500}> eMarka</Heading></Link>
                 </Flex>
+>>>>>>> 927789d1f7cc93c7267f25ad1c98d55de75aa343
                 <Link href="/"><NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" /></Link>
                 {isLogged ? 
                         <Link href="/profileView"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
                         : <Link href="/register"><NavItem navSize={navSize} icon={FiUser} title="Registrer deg"/></Link>}
+<<<<<<< HEAD
+                <Link href="/"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
+                <Link href="/routes/explore"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
+                {isLogged ? 
+                        <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
+                        : <Text></Text>}
+=======
                 <Link href="/observations"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
                 <Link href="/routes"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
                 <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
+>>>>>>> 927789d1f7cc93c7267f25ad1c98d55de75aa343
                 <Link href="/settings"><NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" /></Link>
                 
             </Flex>
@@ -98,9 +113,14 @@ function Sidebar() {
             >
                 <Divider display={navSize == "small" ? "none" : "flex"} />
                 <Flex mt={4} align="center">
-                    <Avatar size="sm" src="avatar-1.jpg" />
+                    <Avatar size="sm" src="profilbilde.jpeg" />
                     <Flex flexDir="column" ml={4} display={navSize == "small" ? "none" : "flex"}>
-                        {isLogged ? <Link href={"/logout"} color={"gray"}> Logg ut </Link> : <Link href={"/login"} color={"gray"}> Logg inn </Link> }
+                        {isLogged && user ? 
+                        <div>
+                            <Heading fontSize={"1.5xl"} fontFamily={"body"} color={"grey.500"} fontWeight={500}> {user.username}</Heading>
+                        <Link href={"/logout"} color={"gray"}> Logg ut </Link>
+                        </div>
+                         : <Link href={"/login"} color={"gray"}> Logg inn </Link> }
                     </Flex>
                 </Flex>
             </Flex>
