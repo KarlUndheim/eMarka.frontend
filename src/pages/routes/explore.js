@@ -19,12 +19,12 @@ const Explore = ({ posts }) => {
 
   return (
     <Flex color='grey.500'>
-    <Center w='190px' bg='white'>
-      <Sidebar/>
-    </Center>
+    <Box w='190px' bg='white' position='fixed'>
+      <Sidebar z-index='1001'/>
+    </Box>
     <Box flex='1' bg={EMARKA_GREEN}>
-    <Container maxW={"1200px"} mt={5} >
-      <Box maxW={{ sm: "90%" }} m={{ sm: "0 auto" }}>
+    <Container maxW={"1200px"} mt={5} mr={15}>
+      <Box maxW={{ sm: "90%" }} m={{ sm: "0 auto" } }>
         <Heading>Ruter</Heading>
         <Divider mt={5} mb={3} />
       </Box>
@@ -38,11 +38,8 @@ const Explore = ({ posts }) => {
                   </Box>
                 </a>
               </Link>
-            
-          
           })
         }
-        
       </Flex>
     </Container>
     </Box>
