@@ -78,28 +78,18 @@ function Sidebar() {
                 alignItems={navSize == "small" ? "center" : "flex-start"}
                 as="nav"
             >
-<<<<<<< HEAD
-                <Heading fontSize={"4xl"} fontFamily={"body"} color={EMARKA_GREEN} fontWeight={500}> eMarka</Heading>
-=======
                 <Flex>
                 <Link href="/"><Heading fontSize={"4xl"} fontFamily={"body"} space-between={"10px"} color= {EMARKA_GREEN} fontWeight={500}> eMarka</Heading></Link>
                 </Flex>
->>>>>>> 927789d1f7cc93c7267f25ad1c98d55de75aa343
                 <Link href="/"><NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" /></Link>
                 {isLogged ? 
                         <Link href="/profileView"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
                         : <Link href="/register"><NavItem navSize={navSize} icon={FiUser} title="Registrer deg"/></Link>}
-<<<<<<< HEAD
                 <Link href="/"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
                 <Link href="/routes/explore"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
                 {isLogged ? 
                         <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
                         : <Text></Text>}
-=======
-                <Link href="/observations"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
-                <Link href="/routes"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
-                <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
->>>>>>> 927789d1f7cc93c7267f25ad1c98d55de75aa343
                 <Link href="/settings"><NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" /></Link>
                 
             </Flex>
