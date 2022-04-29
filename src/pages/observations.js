@@ -44,6 +44,7 @@ export default function Observation() {
     const [lng, setLng] = useState(10.4885);
     const [lat, setLat] = useState(63.3945);
     const [zoom, setZoom] = useState(12);
+    const [path, setPath] = useState(turf.featureCollection([]));
    
     useEffect(() => {
         const attachMap = () => {
@@ -56,32 +57,60 @@ export default function Observation() {
                 center: [lng, lat],
                 zoom: zoom,
             });
-            map.on('click', (event) => {
-                // If the user clicked on one of your markers, get its information.
-                const features = map.queryRenderedFeatures(event.point, {
-                  layers: ['YOUR_LAYER_NAME'] // replace with your layer name
-                });
-                if (!features.length) {
-                  return;
+            const fillMap = () => {
+                if (!mapContainer.current) {
+                    return;
                 }
-                const feature = features[0];
-              
-                // Code from the next step will go here.
-                /* 
-    Create a popup, specify its options 
-    and properties, and add it to the map.
-  */
-                const popup = new mapboxgl.Popup({ offset: [0, -15] })
-                .setLngLat(feature.geometry.coordinates)
-                .setHTML(
-                `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-                )
-                .addTo(map);
-            });
+                map.on('load', async () => {
+                    map.addLayer({
+                        id: 'point-symbol',
+                        type: 'circle',
+                        source: {
+                            data: path,
+                            type: 'geojson',
+                        },
+                        paint: {
+                            'circle-radius': 10,
+                            'circle-color': '#1967d2',
+                        },
+                    });
+                    map.addSource('route', {
+                        type: 'geojson',
+                        data: nothing,
+                    });
+    
+                    map.addLayer({
+                        id: 'route',
+                        type: 'line',
+                        source: 'route',
+                        layout: {
+                            'line-join': 'round',
+                            'line-cap': 'round',
+                        },
+                        paint: {
+                            'line-color': '#1967d2',
+                            'line-width': ['interpolate', ['linear'], ['zoom'], 12, 3, 22, 12],
+                        },
+                    });
+    
+                    await map.on('click', addPoints);
+                });
+            };
+
             setMap(mapInit);
         };
         !map && attachMap(mapContainer);
     }, [map]);
+
+    const addPoints = async (event) => {
+        const coordinates = map.unproject(event.point);
+        const newPoint = turf.point([coordinates.lng, coordinates.lat]);
+        path.features.push(newPoint);
+        map.getSource('point-symbol').setData(path);
+        // if (path.features.length > 2) {
+        //     generateRoute();
+        // }
+    };
 
     return (
         <Flex color='grey.500'>
