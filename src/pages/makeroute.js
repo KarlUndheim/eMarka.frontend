@@ -511,7 +511,6 @@ export default function MapView() {
                           pointerEvents='none'
                          color='gray.300'
                            fontSize='1.2em'
-                         //  children='$'
                             />
                    <Input type = 'Rich text' id="description" placeholder='Beskrivelse' onChange={handleSetRouteDescription}/>
                   </InputGroup>

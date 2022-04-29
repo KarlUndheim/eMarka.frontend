@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as turf from '@turf/turf';
@@ -27,6 +27,13 @@ import { Flex, Center, Text } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Footer from '../components/Footer/Footer';
 import { EMARKA_GREEN } from '../../consts';
+import { render } from "react-dom";
+import MapGL, {
+    Marker,
+    Popup,
+    NavigationControl,
+    FullscreenControl
+  } from "react-map-gl";
 
 mapboxgl.accessToken =
     'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
@@ -48,6 +55,28 @@ export default function Observation() {
                 style: "mapbox://styles/audunrb/cl2fy759q00ct17prdgffafrf",
                 center: [lng, lat],
                 zoom: zoom,
+            });
+            map.on('click', (event) => {
+                // If the user clicked on one of your markers, get its information.
+                const features = map.queryRenderedFeatures(event.point, {
+                  layers: ['YOUR_LAYER_NAME'] // replace with your layer name
+                });
+                if (!features.length) {
+                  return;
+                }
+                const feature = features[0];
+              
+                // Code from the next step will go here.
+                /* 
+    Create a popup, specify its options 
+    and properties, and add it to the map.
+  */
+                const popup = new mapboxgl.Popup({ offset: [0, -15] })
+                .setLngLat(feature.geometry.coordinates)
+                .setHTML(
+                `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+                )
+                .addTo(map);
             });
             setMap(mapInit);
         };
