@@ -46,7 +46,7 @@ const ProfileView = () => {
           alt={"Avatar Alt"}
           mb={4}
           pos={"relative"}
-          src={user != null ? `${BACKEND_URL}${user}` : ""}
+          src={"profilbilde.jpeg"}
         />
         {user && (
           <div>
@@ -60,7 +60,8 @@ const ProfileView = () => {
             <Stack align={"center"} justify={"center"} direction={"row"} mt={6}></Stack>
 
             <Stack mt={8} direction={"row"} justify={"center"} spacing={4}>
-              <Link href="/routes" _hover={{ textDecoration: "none" }}>
+              <Link href="/routes/explore
+              " _hover={{ textDecoration: "none" }}>
                 <Button
                   flex={1}
                   fontSize={"sm"}

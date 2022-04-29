@@ -42,7 +42,7 @@ const Route = ({ data }) => {
             },
           }}
         >
-        <Image rounded={"lg"} height={230} width={282} objectFit={"cover"} src={`/images/skogstur.jpeg`} />
+        <Image rounded={"lg"} height={230} width={282} objectFit={"cover"} src={`/skogstur.jpeg`} />
        
         </Box>
         <Stack pt={10} align={"center"}>
