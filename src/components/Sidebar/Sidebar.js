@@ -75,23 +75,14 @@ function Sidebar() {
                 alignItems={navSize == "small" ? "center" : "flex-start"}
                 as="nav"
             >
-                <IconButton
-                    background="none"
-                    mt={5}
-                    _hover={{ background: 'none' }}
-                    icon={<FiMenu />}
-                    onClick={() => {
-                        if (navSize == "small")
-                            changeNavSize("large")
-                        else
-                            changeNavSize("small")
-                    }}
-                />
+                <Flex>
+                <Link href="/"><Heading fontSize={"4xl"} fontFamily={"body"} space-between={"10px"} color= {EMARKA_GREEN} fontWeight={500}> eMarka</Heading></Link>
+                </Flex>
                 <Link href="/"><NavItem navSize={navSize} icon={FiHome} title="Hjem" href= "../../pages/" /></Link>
                 {isLogged ? 
                         <Link href="/profileView"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
                         : <Link href="/register"><NavItem navSize={navSize} icon={FiUser} title="Registrer deg"/></Link>}
-                <Link href="/"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
+                <Link href="/observations"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
                 <Link href="/routes"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
                 <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
                 <Link href="/settings"><NavItem navSize={navSize} icon={FiSettings} title="Innstillinger" /></Link>
