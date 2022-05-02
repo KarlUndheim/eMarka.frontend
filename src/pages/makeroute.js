@@ -232,7 +232,7 @@ export default function MapView() {
   
           console.log(req)
         
-        router.push("/routes");
+        router.push("/routes/explore");
     };
 
     // const clearPath = () => {

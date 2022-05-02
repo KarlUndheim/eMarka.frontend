@@ -85,7 +85,7 @@ function Sidebar() {
                 {isLogged ? 
                         <Link href="/profileView"><NavItem navSize={navSize} icon={FiUser} title="Din profil"/></Link>
                         : <Link href="/register"><NavItem navSize={navSize} icon={FiUser} title="Registrer deg"/></Link>}
-                <Link href="/"><NavItem navSize={navSize} icon={FiMapPin} title="Interessepunkter" /></Link>
+                <Link href="/observations"><NavItem navSize={navSize} icon={FiMapPin} title="Observasjoner" /></Link>
                 <Link href="/routes/explore"><NavItem navSize={navSize} icon={FiActivity}  title="Ruter" href= "/routes"/></Link>
                 {isLogged ? 
                         <Link href="/makeroute"><NavItem navSize={navSize} icon={FiNavigation} title="Lag rute" description="Opprett ruten du akkurat har gått, eller tegn din drømmetur." /></Link>
