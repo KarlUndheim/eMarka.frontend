@@ -11,7 +11,7 @@ const Explore = ({ posts }) => {
   const [routes, setRoute] = useState(null);
 
   useEffect (async () => {
-    const response = await fetch('http://localhost:1337/api/routes');
+    const response = await fetch('https://emarkabackend.herokuapp.com/api/routes');
     const data = await response.json();
     setRoute(data.data);
     console.log(data.data);
