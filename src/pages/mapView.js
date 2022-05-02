@@ -50,8 +50,8 @@ mapboxgl.accessToken =
 export default function MapView(routeOnMap) {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
-    const [lng, setLng] = useState(10.4885);
-    const [lat, setLat] = useState(63.3945);
+    const [lng, setLng] = useState(10.4879);
+    const [lat, setLat] = useState(63.3853);
     const [zoom, setZoom] = useState(12);
     const [finalPath, setFinalPath] = useState([]);
     const [path, setPath] = useState(turf.featureCollection([]));

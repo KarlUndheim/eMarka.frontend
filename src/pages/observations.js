@@ -41,8 +41,8 @@ mapboxgl.accessToken =
 export default function Observation() {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
-    const [lng, setLng] = useState(10.4885);
-    const [lat, setLat] = useState(63.3945);
+    const [lng, setLng] = useState(10.4879);
+    const [lat, setLat] = useState(63.3853);
     const [zoom, setZoom] = useState(12);
     const [path, setPath] = useState(turf.featureCollection([]));
    
@@ -93,7 +93,7 @@ export default function Observation() {
                         },
                     });
     
-                    await map.on('click', addPoints);
+                    await map.on('click', addObservation);
                 });
             };
 
@@ -102,7 +102,7 @@ export default function Observation() {
         !map && attachMap(mapContainer);
     }, [map]);
 
-    const addPoints = async (event) => {
+    const addObservation = async (event) => {
         const coordinates = map.unproject(event.point);
         const newPoint = turf.point([coordinates.lng, coordinates.lat]);
         path.features.push(newPoint);
