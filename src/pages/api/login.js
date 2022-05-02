@@ -1,5 +1,5 @@
 import nookies from "nookies";
-import { post } from "../../utils/auth";
+import { post } from "../../../utils/auth";
 
 const handler = async (req, res) => {
   const body = req.body;

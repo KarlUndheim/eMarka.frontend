@@ -102,6 +102,8 @@ export default function MapView() {
                     data: nothing,
                 });
 
+                // nothing = tom liste
+
                 map.addLayer({
                     id: 'route',
                     type: 'line',

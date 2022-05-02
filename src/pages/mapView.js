@@ -47,7 +47,7 @@ import { useRouter } from "next/router";
 mapboxgl.accessToken =
     'pk.eyJ1IjoiYXVkdW5yYiIsImEiOiJjbDJoaHVucGcwNjh5M2NxNmh4M3V4ZWQzIn0.2LIVev9IGIpuGHvAzUJ62w';
 
-export default function MapView() {
+export default function MapView(routeOnMap) {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
     const [lng, setLng] = useState(10.4885);
@@ -65,8 +65,12 @@ export default function MapView() {
     const [intersectRoute, setIntersectRoute] = useState([]);
     const router = useRouter();
 
+    console.log(routeOnMap)
+    console.log("utfor")
 
-    useEffect(() => {
+    useEffect(async() => {
+        console.log({routeOnMap})
+        console.log("her")
         const attachMap = () => {
             if (!mapContainer.current) {
                 return;
@@ -80,27 +84,27 @@ export default function MapView() {
             setMap(mapInit);
         };
 
-        const fillMap = () => {
+        const fillMap = async() => {
             if (!mapContainer.current) {
                 return;
             }
             map.on('load', async () => {
-                map.addLayer({
-                    id: 'point-symbol',
-                    type: 'circle',
-                    source: {
-                        data: path,
-                        type: 'geojson',
-                    },
-                    paint: {
-                        'circle-radius': 10,
-                        'circle-color': '#1967d2',
-                    },
-                });
+                
+                console.log(routeOnMap)
+                console.log("Si mæ at det her ikke e rett^")
+
+                
                 map.addSource('route', {
-                    type: 'geojson',
-                    data: nothing,
-                });
+                    'type': 'geojson',
+                    'data': {
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': {
+                    'type': 'LineString',
+                    'coordinates': routeOnMap.routeOnMap                
+                    }
+                    }
+                    });
 
                 map.addLayer({
                     id: 'route',
@@ -116,13 +120,15 @@ export default function MapView() {
                     },
                 });
 
-                await map.on('click', null);
+                // await map.on('click',null);
             });
         };
 
+        
+
         !map && attachMap(mapContainer);
         map && fillMap(mapContainer);
-    }, [map]);
+    }, [map, routeOnMap]);
 
     const fetchRoute = async () => {
         clearPath();
@@ -173,3 +179,4 @@ export default function MapView() {
                 </Box>
     );
 }
+
