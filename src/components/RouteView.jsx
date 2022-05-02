@@ -21,10 +21,21 @@ import Sidebar from "./Sidebar/Sidebar";
 import axios from "axios";
 import MapView from "../pages/mapView";
 import { convertLength } from "@turf/turf";
+import { useRouter } from "next/router";
+
+
+
+
 
 
 const RouteView = ({ post }) => {
   const postID = post.id;
+  const router = useRouter();
+  
+  const toSettings = () => {
+    console.log("her skjer det")
+    router.push("/settings");
+  };
 
   const {
     Title,
@@ -33,6 +44,7 @@ const RouteView = ({ post }) => {
     description
   } = post.attributes;
 
+  
   // console.log(Title)
   // console.log(route.coordinates)
 
@@ -79,9 +91,6 @@ const RouteView = ({ post }) => {
               >
                 {Title}
               </Heading>
-              <Text color={useColorModeValue("gray.900", "gray.400")} fontWeight={300} fontSize={"2xl"}>
-                Distanse {distance}km
-              </Text>
             </Box>
 
             <Stack
@@ -97,10 +106,10 @@ const RouteView = ({ post }) => {
                   textTransform={"uppercase"}
                   mb={"4"}
                 >
-                  Time & Location
+                  Distanse
                 </Text>
                 <Text fontSize="1xl">
-                  Trondheim @ 2022
+                {distance}km
                 </Text>
               </Box>
               <Box>
@@ -118,7 +127,7 @@ const RouteView = ({ post }) => {
             </Stack>
             { (
               <Button
-                loadingText="Uploading ticket"
+                onclick={() => router.push("/settings")}
                 size="lg"
                 bg={EMARKA_GREEN}
                 color={"white"}
@@ -126,10 +135,9 @@ const RouteView = ({ post }) => {
                   bg: "green.300",
                 }}              
               >
-                Trykk for å se ruta
+                Rediger
               </Button>
             )}
-
             <Stack direction="row" alignItems="center" justifyContent={"center"}></Stack>
           </Stack>
         </SimpleGrid>

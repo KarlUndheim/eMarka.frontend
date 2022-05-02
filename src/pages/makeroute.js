@@ -50,8 +50,8 @@ mapboxgl.accessToken =
 export default function MapView() {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
-    const [lng, setLng] = useState(10.4885);
-    const [lat, setLat] = useState(63.3945);
+    const [lng, setLng] = useState(10.4879);
+    const [lat, setLat] = useState(63.3853);
     const [zoom, setZoom] = useState(12);
     const [finalPath, setFinalPath] = useState([]);
     const [path, setPath] = useState(turf.featureCollection([]));
@@ -230,7 +230,7 @@ export default function MapView() {
 
             console.log(JSON.stringify({data:body}))
 
-        const req = await axios.post("http://localhost:1337/api/routes", {data:body});
+        const req = await axios.post("https://emarkabackend.herokuapp.com/api/routes", {data:body});
   
           console.log(req)
         

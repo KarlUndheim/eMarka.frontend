@@ -90,7 +90,7 @@ import {
         
       };
   
-      const req = await axios.post('http://localhost:1337/api/users', body);
+      const req = await axios.post('https://emarkabackend.herokuapp.com/api/users', body);
 
       console.log(JSON.stringify(body))
   
