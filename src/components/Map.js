@@ -32,5 +32,5 @@ const MapGL = ReactMapboxGl({
         </Layer>
       </MapGL>
     </div>
-  );
+  );}
 export default Map;
