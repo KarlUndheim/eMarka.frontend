@@ -71,7 +71,7 @@ import {setCookie} from "nookies"
         password: password,
       };
   
-      const req = await axios.post("https://emarka-backend.herokuapp.com/api/auth/local", body);
+      const req = await axios.post("https://emarkabackend.herokuapp.com/api/auth/local", body);
   
       const success = req.data.jwt != null;
   
